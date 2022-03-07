@@ -1,31 +1,36 @@
-import type { NextPage } from 'next'
 import styled from 'styled-components'
-
-const Card = styled.li`
-  background-color: red;
-  width: 200px;
-  height: 200px;
-  margin: 40px;
+import BeerCard from './components/BeerCard/BeerCard'
+const CardContainer = styled.ul`
+  margin-top: 40px;
 `
-
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`
 interface BeerProps {
   id: number
   name: string
   description: string
+  image_url: string
 }
 
 const Home = ({ beers }: { beers: BeerProps[] }) => {
   console.log(beers)
   return (
-    <div>
-      <ul>
-        {beers.map(({ id, name, description }) => (
-          <Card key={id}>
-            {id} {name} {description}
-          </Card>
+    <Wrapper>
+      <CardContainer>
+        {beers.map(({ id, name, description, image_url }) => (
+          <BeerCard
+            key={id}
+            id={id}
+            name={name}
+            description={description}
+            image_url={image_url}
+          />
         ))}
-      </ul>
-    </div>
+      </CardContainer>
+    </Wrapper>
   )
 }
 
