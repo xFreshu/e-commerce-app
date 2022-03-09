@@ -65,9 +65,18 @@ const InfiniteScrollComponent = ({ beers }: { beers: BeerProps[] }) => {
   )
 }
 
-InfiniteScrollComponent.getInitialProps = async () => {
+// InfiniteScrollComponent.getInitialProps = async () => {
+//   const res = await fetch(`https://api.punkapi.com/v2/beers?page=1&per_page=10`)
+//   const beers = await res.json()
+//   return { beers }
+// }
+
+export async function getServerSideProps() {
   const res = await fetch(`https://api.punkapi.com/v2/beers?page=1&per_page=10`)
   const beers = await res.json()
-  return { beers }
+  return {
+    props: { beers },
+  }
 }
+
 export default InfiniteScrollComponent
