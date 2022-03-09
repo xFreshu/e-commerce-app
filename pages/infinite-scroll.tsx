@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
+import {
+  StyledInfiniteScroll,
+  Wrapper,
+  CardContainer,
+} from '../styles/infinite-scroll.styles'
 import BeerCard from '../components/BeerCard/BeerCard'
-import InfiniteScroll from 'react-infinite-scroll-component'
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner'
 import axios from 'axios'
 
-const CardContainer = styled.ul`
-  margin-top: 40px;
-`
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-`
 interface BeerProps {
   id: number
   name: string
@@ -33,19 +29,21 @@ const InfiniteScrollComponent = ({ beers }: { beers: BeerProps[] }) => {
   }, [keyPage])
   const fetchData = () => {
     console.log(newBeers)
-    setBeers([...getBeers, ...newBeers])
-    setKeyPage(keyPage + 1)
-    console.log(keyPage)
+    setTimeout(() => {
+      setBeers([...getBeers, ...newBeers])
+      setKeyPage(keyPage + 1)
+      console.log(keyPage)
+    }, 2000)
   }
 
   return (
     <Wrapper>
       <CardContainer>
-        <InfiniteScroll
+        <StyledInfiniteScroll
           dataLength={getBeers.length} //This is important field to render the next data
           next={fetchData}
           hasMore={true}
-          loader={<h4>Loading...</h4>}
+          loader={<LoadingSpinner />}
           endMessage={
             <p style={{ textAlign: 'center' }}>
               <b>Yay! You have seen it all</b>
@@ -61,7 +59,7 @@ const InfiniteScrollComponent = ({ beers }: { beers: BeerProps[] }) => {
               image_url={image_url}
             />
           ))}
-        </InfiniteScroll>
+        </StyledInfiniteScroll>
       </CardContainer>
     </Wrapper>
   )

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from './BeerCard.styles'
 //change type
-const BeerCard = ({ id, name, image_url, description }: any) => {
+const BeerCard = ({ id, name, image_url, description }: never) => {
   return (
     <Card key={id}>
       <span>{id}</span>

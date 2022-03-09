@@ -1,7 +1,9 @@
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner'
+
 const Home = () => {
   return (
     <>
-      <div>123</div>
+      <LoadingSpinner />
     </>
   )
 }
