@@ -1,6 +1,5 @@
-import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
-const Card = styled.li`
+export const Card = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,16 +30,3 @@ const Card = styled.li`
     margin-bottom: 20px;
   }
 `
-
-const BeerCard = ({ id, name, image_url, description }: never) => {
-  return (
-    <Card key={id}>
-      <span>{name}</span>
-      <img src={image_url} alt={name} />
-      <div>{description}</div>
-      <button>Get more info</button>
-    </Card>
-  )
-}
-
-export default BeerCard

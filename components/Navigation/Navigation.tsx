@@ -1,15 +1,19 @@
 import React, { FunctionComponent } from 'react'
 import { NavigationBar } from './Navigation.styles'
+import { useRouter } from 'next/router'
 
 const Navigation: FunctionComponent = () => {
+  const router = useRouter()
   return (
     <nav>
       <NavigationBar>
-        <li>Beers application</li>
+        <li onClick={() => router.push('/')}>Beers application</li>
         <li>
           <input type="text" />
         </li>
-        <li>Infinite loop beers</li>
+        <li onClick={() => router.push('/infinite-scroll')}>
+          Infinite scroll beers
+        </li>
         <li>Pagination beers</li>
       </NavigationBar>
     </nav>

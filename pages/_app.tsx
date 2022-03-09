@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app'
 import { GlobalStyles } from '../styles/GlobalStyles'
-import Navigation from './components/Navigation/Navigation'
+import Navigation from '../components/Navigation/Navigation'
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>

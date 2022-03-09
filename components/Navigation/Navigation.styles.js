@@ -9,6 +9,9 @@ export const NavigationBar = styled.ul`
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   li {
     margin: 20px 40px;
+    :hover {
+      cursor: pointer;
+    }
     :nth-child(2) {
       input {
         width: 400px;
