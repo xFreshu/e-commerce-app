@@ -6,7 +6,6 @@ export const CardContainer = styled.ul`
   outline: hidden;
 `
 
-
 export const StyledInfiniteScroll = styled(InfiniteScroll)`
   margin-bottom: 40px;
   ::-webkit-scrollbar {

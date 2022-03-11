@@ -11,7 +11,7 @@ export const Card = styled.li`
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   transition: 0.7s;
   :hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
   }
   span {
     margin: 20px 0;
@@ -27,6 +27,7 @@ export const Card = styled.li`
     text-align: justify;
   }
   button {
+    margin-top: auto;
     margin-bottom: 20px;
   }
 `

@@ -21,7 +21,7 @@ const InfiniteScrollComponent = ({ beers }: { beers: BeerProps[] }) => {
   const [newBeers, setNewBeers] = useState([])
   useEffect(() => {
     axios
-      .get(`https://api.punkapi.com/v2/beers?page=${keyPage}&per_page=10`)
+      .get(`https://api.punkapi.com/v2/beers?page=${keyPage}&per_page=5`)
       .then((response) => {
         console.log(response.data)
         setNewBeers(response.data)
@@ -33,7 +33,7 @@ const InfiniteScrollComponent = ({ beers }: { beers: BeerProps[] }) => {
       setBeers([...getBeers, ...newBeers])
       setKeyPage(keyPage + 1)
       console.log(keyPage)
-    }, 2000)
+    }, 500)
   }
 
   return (
@@ -65,14 +65,8 @@ const InfiniteScrollComponent = ({ beers }: { beers: BeerProps[] }) => {
   )
 }
 
-// InfiniteScrollComponent.getInitialProps = async () => {
-//   const res = await fetch(`https://api.punkapi.com/v2/beers?page=1&per_page=10`)
-//   const beers = await res.json()
-//   return { beers }
-// }
-
 export async function getServerSideProps() {
-  const res = await fetch(`https://api.punkapi.com/v2/beers?page=1&per_page=10`)
+  const res = await fetch(`https://api.punkapi.com/v2/beers?page=1&per_page=5`)
   const beers = await res.json()
   return {
     props: { beers },

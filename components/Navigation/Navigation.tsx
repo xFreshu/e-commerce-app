@@ -14,7 +14,9 @@ const Navigation: FunctionComponent = () => {
         <li onClick={() => router.push('/infinite-scroll')}>
           Infinite scroll beers
         </li>
-        <li>Pagination beers</li>
+        <li onClick={() => router.push('/pagination-beers')}>
+          Pagination beers
+        </li>
       </NavigationBar>
     </nav>
   )
