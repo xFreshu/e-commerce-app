@@ -4,6 +4,23 @@ import Navigation from '../components/Navigation/Navigation'
 import { useState } from 'react'
 function MyApp({ Component, pageProps }: AppProps) {
   const [cartArray, setCartArray] = useState([])
+
+  const uniqueItems = new Set()
+
+  const unique = cartArray.filter(({ id }: any) => {
+    const isDuplicate = uniqueItems.has(id)
+
+    uniqueItems.add(id)
+
+    if (!isDuplicate) {
+      return true
+    }
+  })
+
+  const deleteBeerFromCart = (id: number) => {
+    const filteredArray = cartArray.filter((item) => item.id !== id)
+    setCartArray(filteredArray)
+  }
   return (
     <>
       <GlobalStyles />
@@ -12,6 +29,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         {...pageProps}
         cartArray={cartArray}
         setCartArray={setCartArray}
+        unique={unique}
+        deleteBeerFromCart={deleteBeerFromCart}
       />
     </>
   )

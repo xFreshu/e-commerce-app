@@ -11,6 +11,7 @@ import {
   Wrapper,
   ShoppingCard,
 } from '../styles/index.styles'
+import { useEffect } from 'react'
 //(Math.random() * 50).toFixed(2)
 interface BeerData {
   cost: number
@@ -20,23 +21,27 @@ interface BeerData {
   tagline: string
 }
 
-const Home = ({ cartArray }: any) => {
+const Home = ({ cartArray, unique, setCartArray, deleteBeerFromCart }: any) => {
   const getTotalFromCart: string = cartArray
     .map((item: BeerData) => item.cost * item.amount)
     .reduce((prev: number, next: number) => prev + next, 0)
     .toFixed(2)
 
-  const uniqueItems = new Set()
-
-  const unique = cartArray.filter(({ id }: any) => {
-    const isDuplicate = uniqueItems.has(id)
-
-    uniqueItems.add(id)
-
-    if (!isDuplicate) {
-      return true
-    }
-  })
+  const addAmount = (id: any, action?: string) => {
+    setCartArray(
+      unique.map((item: any) => {
+        if (item.id === id) {
+          if (action === 'add') {
+            item.amount += 1
+            console.log('test')
+          } else {
+            item.amount -= 1
+          }
+        }
+        return item
+      })
+    )
+  }
 
   return (
     <>
@@ -53,9 +58,19 @@ const Home = ({ cartArray }: any) => {
                   <span>$ {item.cost}</span>
                   <span>Amount: {item.amount}</span>
                   <ButtonContainer>
-                    <StyledButton>+</StyledButton>
-                    <StyledButton>-</StyledButton>
-                    <StyledButton>Delete</StyledButton>
+                    <StyledButton onClick={() => addAmount(item.id, 'add')}>
+                      +
+                    </StyledButton>
+                    {item.amount !== 0 ? (
+                      <StyledButton onClick={() => addAmount(item.id)}>
+                        -
+                      </StyledButton>
+                    ) : (
+                      <StyledButton>-</StyledButton>
+                    )}
+                    <StyledButton onClick={() => deleteBeerFromCart(item.id)}>
+                      Delete
+                    </StyledButton>
                   </ButtonContainer>
                 </div>
               </Item>
