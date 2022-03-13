@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Card } from '../components/BeerCard/BeerCard.styles'
 import {
   Wrapper,
   ChangePageButton,
   Container,
 } from '../styles/pagination-beers.styles'
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner'
+import BeerCard from '../components/BeerCard/BeerCard'
 
-const PaginationBeers = () => {
+const PaginationBeers = ({ setCartArray, cartArray }: any) => {
   const [getBeer, setBeer] = useState([])
   const [counter, setCounter] = useState(1)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -40,14 +40,24 @@ const PaginationBeers = () => {
       <ChangePageButton onClick={PreviousPage}>Previous page</ChangePageButton>
       <Container>
         {isLoaded ? (
-          getBeer.map(({ id, name, image_url, description }: any) => (
-            <Card key={id}>
-              <span>{id}</span>
-              <span>{name}</span>
-              <img src={image_url} alt={name} />
-              <div>{description.substring(0, 100)}...</div>
-              <button>Get more info</button>
-            </Card>
+          getBeer.map(({ id, name, image_url, description, tagline }: any) => (
+            // <Card key={id}>
+            //   <span>{id}</span>
+            //   <span>{name}</span>
+            //   <img src={image_url} alt={name} />
+            //   <div>{description.substring(0, 100)}...</div>
+            //   <button>Get more info</button>
+            // </Card>
+            <BeerCard
+              key={id}
+              id={id}
+              name={name}
+              description={description}
+              image_url={image_url}
+              tagline={tagline}
+              setCartArray={setCartArray}
+              cartArray={cartArray}
+            />
           ))
         ) : (
           <LoadingSpinner />

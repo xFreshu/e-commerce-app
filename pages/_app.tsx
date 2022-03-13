@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   })
 
   const deleteBeerFromCart = (id: number) => {
-    const filteredArray = cartArray.filter((item) => item.id !== id)
+    const filteredArray = cartArray.filter((item: any) => item.id !== id)
     setCartArray(filteredArray)
   }
   return (
