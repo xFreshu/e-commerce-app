@@ -11,7 +11,6 @@ import {
   Wrapper,
   ShoppingCard,
 } from '../styles/index.styles'
-
 //(Math.random() * 50).toFixed(2)
 const DUMMY_DATA = [
   {
@@ -29,7 +28,9 @@ const DUMMY_DATA = [
     amount: 2,
   },
 ]
-const getTotalFromCart = DUMMY_DATA.map((item) => item.cost * item.amount)
+const getTotalFromCart: string = DUMMY_DATA.map(
+  (item) => item.cost * item.amount
+)
   .reduce((prev, next) => prev + next)
   .toFixed(2)
 
@@ -51,7 +52,7 @@ const Home = () => {
                   <ButtonContainer>
                     <StyledButton>+</StyledButton>
                     <StyledButton>-</StyledButton>
-                    <StyledButton isBigger>Delete</StyledButton>
+                    <StyledButton>Delete</StyledButton>
                   </ButtonContainer>
                 </div>
               </Item>
@@ -62,17 +63,17 @@ const Home = () => {
               <TitleSummary>Your summary</TitleSummary>
               <PriceSummary>
                 <span>TOTAL</span>
-                <span>$ {getTotalFromCart}</span>
+                <span>$ {+getTotalFromCart}</span>
               </PriceSummary>
               <PriceSummary>
                 <span>TAX (20%)</span>
-                <span>$ {(getTotalFromCart * 0.2).toFixed(2)}</span>
+                <span>$ {(+getTotalFromCart * 0.2).toFixed(2)}</span>
               </PriceSummary>
               <PriceSummary>
                 <span>GRAND TOTAL</span>
-                <span>$ {(getTotalFromCart * 1.2).toFixed(2)}</span>
+                <span>$ {(+getTotalFromCart * 1.2).toFixed(2)}</span>
               </PriceSummary>
-              <ActionButton isFirst>Pay</ActionButton>
+              <ActionButton>Pay</ActionButton>
               <ActionButton>Delete cart</ActionButton>
             </ItemsOverview>
           </ItemsOverviewContainer>

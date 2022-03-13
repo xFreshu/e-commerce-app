@@ -63,11 +63,12 @@ export const StyledButton = styled.button`
   background-color: transparent;
   border: solid 1px black;
   height: 20px;
-  width: ${({ isBigger }) => (isBigger ? '50px' : '20px')};
+  width: 20px;
   margin-right: 20px;
   border-radius: 5px;
   :last-child {
     margin-right: 0;
+    width: 50px;
   }
 `
 
@@ -113,9 +114,11 @@ export const ActionButton = styled.button`
   background-color: transparent;
   padding: 10px;
   border-radius: 10px;
-  margin: ${({ isFirst }) =>
-    isFirst ? '40px 20px 20px 20px' : '0 20px 20px 20px'};
+  margin: 40px 20px 20px 20px;
   transition: 0.7s;
+  :last-child {
+    margin-top: 0;
+  }
   :hover {
     background-color: #000;
     color: #fff;
