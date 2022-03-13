@@ -19,20 +19,31 @@ interface BeerData {
   name: string
   tagline: string
 }
-const DUMMY_DATA: [] = []
-const getTotalFromCart: string = DUMMY_DATA.map(
-  (item: BeerData) => item.cost * item.amount
-)
-  .reduce((prev, next) => prev + next, 0)
-  .toFixed(2)
 
-const Home = () => {
+const Home = ({ cartArray }: any) => {
+  const getTotalFromCart: string = cartArray
+    .map((item: BeerData) => item.cost * item.amount)
+    .reduce((prev: number, next: number) => prev + next, 0)
+    .toFixed(2)
+
+  const uniqueItems = new Set()
+
+  const unique = cartArray.filter(({ id }: any) => {
+    const isDuplicate = uniqueItems.has(id)
+
+    uniqueItems.add(id)
+
+    if (!isDuplicate) {
+      return true
+    }
+  })
+
   return (
     <>
       <Wrapper>
         <ShoppingCard>
           <YourItems>
-            {DUMMY_DATA.map((item: BeerData) => (
+            {unique.map((item: BeerData) => (
               <Item key={item.id}>
                 <div>
                   <span>{item.name}</span>

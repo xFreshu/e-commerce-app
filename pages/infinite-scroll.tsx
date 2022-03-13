@@ -8,14 +8,7 @@ import BeerCard from '../components/BeerCard/BeerCard'
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner'
 import axios from 'axios'
 
-interface BeerProps {
-  id: number
-  name: string
-  description: string
-  image_url: string
-}
-
-const InfiniteScrollComponent = ({ beers }: { beers: BeerProps[] }) => {
+const InfiniteScrollComponent = ({ beers, setCartArray, cartArray }: any) => {
   const [keyPage, setKeyPage] = useState(2)
   const [getBeers, setBeers] = useState(beers)
   const [newBeers, setNewBeers] = useState([])
@@ -37,7 +30,7 @@ const InfiniteScrollComponent = ({ beers }: { beers: BeerProps[] }) => {
       console.log(keyPage)
     }, 500)
   }
-
+  // @ts-ignore
   return (
     <Wrapper>
       <CardContainer>
@@ -53,15 +46,20 @@ const InfiniteScrollComponent = ({ beers }: { beers: BeerProps[] }) => {
           }
         >
           {isLoaded
-            ? getBeers.map(({ id, name, description, image_url }) => (
-                <BeerCard
-                  key={id}
-                  id={id}
-                  name={name}
-                  description={description}
-                  image_url={image_url}
-                />
-              ))
+            ? getBeers.map(
+                ({ id, name, description, image_url, tagline }: any) => (
+                  <BeerCard
+                    key={id}
+                    id={id}
+                    name={name}
+                    description={description}
+                    image_url={image_url}
+                    tagline={tagline}
+                    setCartArray={setCartArray}
+                    cartArray={cartArray}
+                  />
+                )
+              )
             : null}
         </StyledInfiniteScroll>
       </CardContainer>
