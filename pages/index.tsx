@@ -12,26 +12,18 @@ import {
   ShoppingCard,
 } from '../styles/index.styles'
 //(Math.random() * 50).toFixed(2)
-const DUMMY_DATA = [
-  {
-    id: 1,
-    name: 'test1',
-    tagline: 'testTagline',
-    cost: 2,
-    amount: 1,
-  },
-  {
-    id: 2,
-    name: 'test2',
-    tagline: 'testTagline2',
-    cost: 3,
-    amount: 2,
-  },
-]
+interface BeerData {
+  cost: number
+  amount: number
+  id: number
+  name: string
+  tagline: string
+}
+const DUMMY_DATA: [] = []
 const getTotalFromCart: string = DUMMY_DATA.map(
-  (item) => item.cost * item.amount
+  (item: BeerData) => item.cost * item.amount
 )
-  .reduce((prev, next) => prev + next)
+  .reduce((prev, next) => prev + next, 0)
   .toFixed(2)
 
 const Home = () => {
@@ -40,7 +32,7 @@ const Home = () => {
       <Wrapper>
         <ShoppingCard>
           <YourItems>
-            {DUMMY_DATA.map((item) => (
+            {DUMMY_DATA.map((item: BeerData) => (
               <Item key={item.id}>
                 <div>
                   <span>{item.name}</span>
@@ -63,15 +55,15 @@ const Home = () => {
               <TitleSummary>Your summary</TitleSummary>
               <PriceSummary>
                 <span>TOTAL</span>
-                <span>$ {+getTotalFromCart}</span>
+                <span>$ {+getTotalFromCart || 0}</span>
               </PriceSummary>
               <PriceSummary>
                 <span>TAX (20%)</span>
-                <span>$ {(+getTotalFromCart * 0.2).toFixed(2)}</span>
+                <span>$ {(+getTotalFromCart * 0.2).toFixed(2) || 0}</span>
               </PriceSummary>
               <PriceSummary>
                 <span>GRAND TOTAL</span>
-                <span>$ {(+getTotalFromCart * 1.2).toFixed(2)}</span>
+                <span>$ {(+getTotalFromCart * 1.2).toFixed(2) || 0}</span>
               </PriceSummary>
               <ActionButton>Pay</ActionButton>
               <ActionButton>Delete cart</ActionButton>
