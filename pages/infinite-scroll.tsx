@@ -19,11 +19,13 @@ const InfiniteScrollComponent = ({ beers }: { beers: BeerProps[] }) => {
   const [keyPage, setKeyPage] = useState(2)
   const [getBeers, setBeers] = useState(beers)
   const [newBeers, setNewBeers] = useState([])
+  const [isLoaded, setIsLoaded] = useState(false)
   useEffect(() => {
     axios
       .get(`https://api.punkapi.com/v2/beers?page=${keyPage}&per_page=5`)
       .then((response) => {
         console.log(response.data)
+        setIsLoaded(true)
         setNewBeers(response.data)
       })
   }, [keyPage])
@@ -50,15 +52,17 @@ const InfiniteScrollComponent = ({ beers }: { beers: BeerProps[] }) => {
             </p>
           }
         >
-          {getBeers.map(({ id, name, description, image_url }) => (
-            <BeerCard
-              key={id}
-              id={id}
-              name={name}
-              description={description}
-              image_url={image_url}
-            />
-          ))}
+          {isLoaded
+            ? getBeers.map(({ id, name, description, image_url }) => (
+                <BeerCard
+                  key={id}
+                  id={id}
+                  name={name}
+                  description={description}
+                  image_url={image_url}
+                />
+              ))
+            : null}
         </StyledInfiniteScroll>
       </CardContainer>
     </Wrapper>

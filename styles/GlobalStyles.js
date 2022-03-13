@@ -7,6 +7,6 @@ export const GlobalStyles = createGlobalStyle`
   box-sizing: border-box;
 }
 html{
-  font-family: 'Hubballi', cursive;
+  font-family: 'Montserrat', sans-serif;
 }
 `

@@ -6,15 +6,18 @@ import {
   ChangePageButton,
   Container,
 } from '../styles/pagination-beers.styles'
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner'
 
 const PaginationBeers = () => {
   const [getBeer, setBeer] = useState([])
   const [counter, setCounter] = useState(1)
+  const [isLoaded, setIsLoaded] = useState(false)
   useEffect(() => {
     axios
       .get(`https://api.punkapi.com/v2/beers?page=${counter}&per_page=6`)
       .then((response: any) => {
         console.log(response.data)
+        setIsLoaded(true)
         setBeer(response.data)
       })
   }, [counter])
@@ -36,15 +39,19 @@ const PaginationBeers = () => {
     <Wrapper>
       <ChangePageButton onClick={PreviousPage}>Previous page</ChangePageButton>
       <Container>
-        {getBeer.map(({ id, name, image_url, description }: any) => (
-          <Card key={id}>
-            <span>{id}</span>
-            <span>{name}</span>
-            <img src={image_url} alt={name} />
-            <div>{description.substring(0, 100)}...</div>
-            <button>Get more info</button>
-          </Card>
-        ))}
+        {isLoaded ? (
+          getBeer.map(({ id, name, image_url, description }: any) => (
+            <Card key={id}>
+              <span>{id}</span>
+              <span>{name}</span>
+              <img src={image_url} alt={name} />
+              <div>{description.substring(0, 100)}...</div>
+              <button>Get more info</button>
+            </Card>
+          ))
+        ) : (
+          <LoadingSpinner />
+        )}
       </Container>
       <ChangePageButton onClick={NextPage}>Next page</ChangePageButton>
     </Wrapper>
